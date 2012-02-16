@@ -7,9 +7,15 @@
   </parent>
 
   <artifactId>build-metrics</artifactId>
-  <version>1.0-beta-5-SNAPSHOT</version>
+  <version>1.0-SNAPSHOT</version>
   <packaging>hpi</packaging>
 
+  <scm>
+    <connection>scm:git:ssh://github.com/jenkinsci/build-metrics-plugin.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/jenkinsci/build-metrics-plugin.git</developerConnection>
+    <url>https://github.com/jenkinsci/build-metrics-plugin</url>
+  </scm>
+	
   <!-- get every artifact through maven.glassfish.org, which proxies all the artifacts that we need -->
   <repositories>
     <repository>
@@ -32,4 +38,24 @@
       <version>1.2</version>
     </dependency>
   </dependencies>
+  
+  <url>http://wiki.jenkins-ci.org/display/JENKINS/build-metrics-plugin</url>
+  <developers>
+    <developer>
+      <id>javamllama</id>
+      <name>Maddy Goss</name>
+      <email>madeline.goss@gmail.com</email>
+    </developer>
+  </developers>
+  
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-release-plugin</artifactId>
+        <configuration>
+          <goals>deploy</goals>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>
