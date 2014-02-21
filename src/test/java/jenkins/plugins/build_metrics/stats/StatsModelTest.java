@@ -28,4 +28,13 @@ public class StatsModelTest {
 		assert 5 == sm.getTotalBuilds();
 		assert ((4.00 / 5.00) * 100.00) == sm.getFailureRate();
 	}
+
+    @Test
+    public void testFolders() {
+        String expectedJobUrl = "job/folder1/job/folder2/job/test";
+        String expectedJobName = "folder1/folder2/test";
+        StatsModel sm = new StatsModel(expectedJobName);
+        org.junit.Assert.assertEquals(expectedJobName, sm.getJobName());
+        org.junit.Assert.assertEquals(expectedJobUrl, sm.getJobUrl());
+    }
 }

@@ -96,4 +96,8 @@ public class StatsModel implements Comparable{
 	  return this.jobName.toUpperCase().compareTo(sm.getJobName().toUpperCase());
 	}
 
+    @Exported
+    public String getJobUrl() {
+        return "job/" + this.jobName.replace("/", "/job/");
+    }
 }

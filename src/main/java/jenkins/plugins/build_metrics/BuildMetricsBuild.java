@@ -16,6 +16,7 @@ public class BuildMetricsBuild {
 	private long duration;
 	private String status;
 	private String description;
+
 	/**
 	 * Static formatter to use for dates
 	 */
@@ -83,4 +84,5 @@ public class BuildMetricsBuild {
 	public void setDescription(String description){
 		this.description = description;
 	}
+    public String getJobUrl() { return "job/" + this.jobName.replace("/", "/job/"); }
 }
