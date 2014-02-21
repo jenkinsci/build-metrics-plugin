@@ -17,10 +17,10 @@ public class StatsFactoryTest {
 		jbsr.add(createJobResult("build job 1", true));
 		jbsr.add(createJobResult("build job 1", false));
 		StatsFactory sf = StatsFactory.generateStats(jbsr);
-		assertEquals("StatsFactory.failureRate", 50.00, sf.getFailureRate());
+		assertEquals("StatsFactory.failureRate", 50.00, sf.getFailureRate(), 0);
 		
 		for(StatsModel stat: sf.getStats()){
-		  assertEquals("StatsModel.failureRate", 50.00, stat.getFailureRate());
+		  assertEquals("StatsModel.failureRate", 50.00, stat.getFailureRate(), 0);
 	  }
 	}
 	

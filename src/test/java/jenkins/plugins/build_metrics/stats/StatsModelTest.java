@@ -1,6 +1,7 @@
 package jenkins.plugins.build_metrics.stats;
 
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 public class StatsModelTest {
 	@Test
@@ -34,7 +35,7 @@ public class StatsModelTest {
         String expectedJobUrl = "job/folder1/job/folder2/job/test";
         String expectedJobName = "folder1/folder2/test";
         StatsModel sm = new StatsModel(expectedJobName);
-        org.junit.Assert.assertEquals(expectedJobName, sm.getJobName());
-        org.junit.Assert.assertEquals(expectedJobUrl, sm.getJobUrl());
+        assertEquals("", expectedJobName, sm.getJobName());
+        assertEquals("", expectedJobUrl, sm.getJobUrl());
     }
 }
