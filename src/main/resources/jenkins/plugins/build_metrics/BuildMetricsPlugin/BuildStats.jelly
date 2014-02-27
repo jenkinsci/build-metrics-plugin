@@ -33,7 +33,7 @@
           </tr>
 			    <j:forEach var="stat" items="${buildStats.stats}">
 			    	<tr class="build-row">
-			    		<td class="pane"><a href="${rootURL}/${stat.jobUrl}/">${stat.jobName}</a></td>
+			    		<td class="pane"><a href="${rootURL}/${stat.jobUrl}">${stat.jobName}</a></td>
               <td class="pane">${stat.successes}</td>
               <td class="pane">${stat.failures}</td>
               <td class="pane">${stat.unstables}</td>
@@ -77,12 +77,12 @@
             <j:forEach var="build" items="${failedBuilds}">
               <tr class="build-row">
                 <td class="pane">${build.status}</td>
-                <td class="pane"><a href="${rootURL}/${build.jobUrl}/">${build.jobName}</a></td>
+                <td class="pane"><a href="${rootURL}/${build.jobUrl}">${build.jobName}</a></td>
                 <td class="pane">
-                  <a href="${rootURL}/${build.jobUrl}/${build.buildNumber}/console"><img src="${rootURL}/plugin/global-build-stats/icons/terminal.gif" /></a>
-                  <a href="${rootURL}/${build.jobUrl}/${build.buildNumber}/">#${build.buildNumber}</a>
+                  <a href="${rootURL}/${build.jobUrl}${build.buildNumber}/console"><img src="${rootURL}/plugin/global-build-stats/icons/terminal.gif" /></a>
+                  <a href="${rootURL}/${build.jobUrl}${build.buildNumber}">#${build.buildNumber}</a>
                 </td>
-                <td class="pane"><a href="${rootURL}/${build.jobUrl}/${build.buildNumber}/">${build.buildDateString}</a></td>
+                <td class="pane"><a href="${rootURL}/${build.jobUrl}${build.buildNumber}/">${build.buildDateString}</a></td>
                 <td class="pane">${build.duration}</td>
                 <td class="pane">${build.nodeName}</td>
                 <td class="pane">${build.userName}</td>

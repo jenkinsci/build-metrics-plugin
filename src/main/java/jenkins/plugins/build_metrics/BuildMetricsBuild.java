@@ -84,5 +84,5 @@ public class BuildMetricsBuild {
 	public void setDescription(String description){
 		this.description = description;
 	}
-    public String getJobUrl() { return "job/" + this.jobName.replace("/", "/job/"); }
+    public String getJobUrl() { return "job/" + this.jobName.replace("/", "/job/") + "/"; }
 }

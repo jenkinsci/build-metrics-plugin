@@ -98,6 +98,6 @@ public class StatsModel implements Comparable{
 
     @Exported
     public String getJobUrl() {
-        return "job/" + this.jobName.replace("/", "/job/");
+        return "job/" + this.jobName.replace("/", "/job/") + "/";
     }
 }
