@@ -1,5 +1,6 @@
 package jenkins.plugins.build_metrics.stats;
 
+import jenkins.model.Jenkins;
 import org.kohsuke.stapler.export.Exported;
 import org.kohsuke.stapler.export.ExportedBean;
 
@@ -97,7 +98,5 @@ public class StatsModel implements Comparable{
 	}
 
     @Exported
-    public String getJobUrl() {
-        return "job/" + this.jobName.replace("/", "/job/") + "/";
-    }
+    public String getJobUrl() { return Jenkins.getInstance().getItemByFullName(this.jobName).getUrl(); }
 }

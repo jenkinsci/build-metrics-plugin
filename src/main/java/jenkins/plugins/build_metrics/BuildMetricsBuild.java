@@ -1,5 +1,7 @@
 package jenkins.plugins.build_metrics;
 
+import jenkins.model.Jenkins;
+
 import java.util.Calendar;
 import java.text.SimpleDateFormat;
 /**
@@ -84,5 +86,5 @@ public class BuildMetricsBuild {
 	public void setDescription(String description){
 		this.description = description;
 	}
-    public String getJobUrl() { return "job/" + this.jobName.replace("/", "/job/") + "/"; }
+    public String getJobUrl() { return Jenkins.getInstance().getItemByFullName(this.jobName).getUrl(); }
 }

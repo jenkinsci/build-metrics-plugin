@@ -60,7 +60,7 @@ public class BuildMetricsPluginSearchFactory {
 	
 	private String findBuildDescription(String jobName, int buildNumber){
 		String description = null;
-		Job j = (Job)(Hudson.getInstance().getItem(jobName));
+		Job j = (Job)(Hudson.getInstance().getItemByFullName(jobName, Job.class));
 		if(j != null){
 			Run r = j.getBuildByNumber(buildNumber);
 			if(r != null){
