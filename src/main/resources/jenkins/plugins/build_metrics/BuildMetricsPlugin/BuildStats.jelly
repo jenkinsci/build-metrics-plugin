@@ -43,7 +43,7 @@
               <td class="pane">${stat.failureRate}%</td>
             </tr>
 		  		</j:forEach>
-  		  		<tr>
+  		  		<tr class="sortbottom">
               <th class="pane" style="font-weight:bold;">Total:</th>
               <th class="pane" style="font-weight:bold;">${buildStats.successes}</th>
               <th class="pane" style="font-weight:bold;">${buildStats.failures}</th>
