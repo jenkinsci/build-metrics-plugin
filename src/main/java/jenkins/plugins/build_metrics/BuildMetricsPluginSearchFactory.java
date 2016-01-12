@@ -82,7 +82,7 @@ public class BuildMetricsPluginSearchFactory {
 	      iUnits = Calendar.YEAR;
 		}
 		Calendar tmpCal = Calendar.getInstance();
-		tmpCal.roll(iUnits, iRange);
+		tmpCal.add(iUnits, iRange);
 		return new Long(tmpCal.getTimeInMillis());
 	}
 	
