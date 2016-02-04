@@ -99,11 +99,12 @@ public class BuildMetricsPluginSearchFactory {
 	public BuildMetricsSearch createBuildMetricsSearch(StaplerRequest req){
 		return new BuildMetricsSearch(
 				req.getParameter("label"),
-				Integer.parseInt(req.getParameter("range")), 
+				Integer.parseInt(req.getParameter("range")),
 				req.getParameter("rangeUnits"),
-				req.getParameter("jobFilter"), 
-				req.getParameter("nodeFilter"), 
-				req.getParameter("launcherFilter")
+				req.getParameter("jobFilter"),
+				req.getParameter("nodeFilter"),
+				req.getParameter("launcherFilter"),
+				req.getParameter("wallCss")
 				);
 	}
 	

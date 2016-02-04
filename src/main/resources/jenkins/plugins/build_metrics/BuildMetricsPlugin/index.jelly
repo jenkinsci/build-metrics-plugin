@@ -130,6 +130,10 @@
 		  	  $('searchBuild_launcherFilteringType_ALL').onchange();
 		  }
 		  ]]></script>
+          <label for="wallView">Wall view : </label>
+          <input type="checkbox" id="searchBuild_wallView" name="wallView" /><br/>
+          <label for="wallCss">Wall view CSS: </label>
+          <textarea id="searchBuild_wallCss" name="wallCss" /><br/>
 	      <input type="submit" class="submit-button" value="${%Search}" name="Submit" />
 	    </form>
     

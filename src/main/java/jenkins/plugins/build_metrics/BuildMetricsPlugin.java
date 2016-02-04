@@ -62,7 +62,8 @@ public class BuildMetricsPlugin extends Plugin {
         req.setAttribute("buildStats", buildStats);
     	req.setAttribute("failedBuilds", failedBuilds);
         req.setAttribute("searchCriteria", searchCriteria);
-    	req.getView(this, "/jenkins/plugins/build_metrics/BuildMetricsPlugin/BuildStats.jelly").forward(req, res);
+        String viewName = req.getParameter("wallView") != null && req.getParameter("wallView").equals("on") ? "BuildStatsWall" : "BuildStats";
+        req.getView(this, "/jenkins/plugins/build_metrics/BuildMetricsPlugin/" + viewName + ".jelly").forward(req, res);
     }
     
     /**
