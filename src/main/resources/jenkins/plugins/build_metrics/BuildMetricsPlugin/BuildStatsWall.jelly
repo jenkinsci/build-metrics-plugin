@@ -1,52 +1,97 @@
 <j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form" xmlns:i="jelly:fmt">
 <l:layout title="${%Build Metrics Plugin Wall}" permission="${it.requiredPermission}">
 
-  <l:main-panel>
+<l:main-panel>
     <style>
-      ${searchCriteria.wallCss}
+        html, body, #page-body, #main-panel, table{
+            height: 100%
+        }
+        body {
+            background-color: #000000;
+            color: #FFFFFF;
+        }
+        .bigtable thead th {
+            background-color: #000000;
+        }
+        .bigtable tr {
+            border-color: #000000;
+        }
+        #side-panel, #page-head, #menuSelector, footer {
+            display:none
+        }
+        #main-panel {
+            margin: 0; padding: 0;
+        }
+        body, table, form, td, th, p {
+            color: #FFFFFF !important;
+        }
+        #projectstatus th, #projectstatus td {
+            font-size: ${fontSize};
+            text-shadow: 0px 0px 10px black;
+
+            background-image: -webkit-gradient(
+                linear,
+                left top,
+                left bottom,
+                color-stop(0, rgba(163,163,163,0.5)),
+                color-stop(1, rgba(113,113,113,0.5))
+            );
+            background-image: -moz-linear-gradient(
+                center top,
+                rgba(163,163,163,0.5) 0%,
+                rgba(113,113,113,0.5) 100%
+            );
+        }
+
     </style>
-    <h1>${searchCriteria.label}</h1>
     <j:choose>
         <j:when test="${empty(buildStats)}">
             <em>${%No jobs found.}</em>
         </j:when>
         <j:otherwise>
-        <table id="projectstatus" class="sortable pane bigtable">
-        <tr style="border-top: 0px;">
-            <th>${%Job name}</th>
-            <th>${%# Successful}</th>
-      <th>${%# Failed}</th>
-      <th>${%# Unstable}</th>
-      <th>${%# Aborted}</th>
-      <th>${%# Not Built}</th>
-      <th>${%# Total Builds}</th>
-      <th>${%Failure Rate}</th>
-      </tr>
-            <j:forEach var="stat" items="${buildStats.stats}">
-                <tr class="build-row">
-                    <td class="pane"><a href="${rootURL}/job/${stat.jobName}/">${stat.jobName}</a></td>
-          <td class="pane">${stat.successes}</td>
-          <td class="pane">${stat.failures}</td>
-          <td class="pane">${stat.unstables}</td>
-          <td class="pane">${stat.aborts}</td>
-          <td class="pane">${stat.noBuilds}</td>
-          <td class="pane">${stat.totalBuilds}</td>
-          <td class="pane">${stat.failureRate}%</td>
-        </tr>
-            </j:forEach>
-            <tr class="sortbottom">
-          <th class="pane" style="font-weight:bold;">Total:</th>
-          <th class="pane" style="font-weight:bold;">${buildStats.successes}</th>
-          <th class="pane" style="font-weight:bold;">${buildStats.failures}</th>
-          <th class="pane" style="font-weight:bold;">${buildStats.unstables}</th>
-          <th class="pane" style="font-weight:bold;">${buildStats.aborts}</th>
-          <th class="pane" style="font-weight:bold;">${buildStats.noBuilds}</th>
-          <th class="pane" style="font-weight:bold;">${buildStats.totalBuilds}</th>
-          <th class="pane" style="font-weight:bold;">${buildStats.failureRate}%</th>
-        </tr>
-        </table>
+            <table id="projectstatus" class="pane bigtable">
+                <thead>
+                    <tr>
+                        <th colspan="8">${searchCriteria.label}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-top: 0px;">
+                        <th>${%Job name}</th>
+                        <th>${%# Successful}</th>
+                        <th>${%# Failed}</th>
+                        <th>${%# Unstable}</th>
+                        <th>${%# Aborted}</th>
+                        <th>${%# Not Built}</th>
+                        <th>${%# Total Builds}</th>
+                        <th>${%Failure Rate}</th>
+                    </tr>
+                    <j:forEach var="stat" items="${buildStats.stats}">
+                        <tr class="build-row" style="background-color: #${stat.bgColor}">
+                            <td class="pane">${stat.jobName}</td>
+                            <td class="pane">${stat.successes}</td>
+                            <td class="pane">${stat.failures}</td>
+                            <td class="pane">${stat.unstables}</td>
+                            <td class="pane">${stat.aborts}</td>
+                            <td class="pane">${stat.noBuilds}</td>
+                            <td class="pane">${stat.totalBuilds}</td>
+                            <td class="pane">${stat.failureRate}%</td>
+                          </tr>
+                    </j:forEach>
+                    <tr>
+                        <th class="pane" style="font-weight:bold;">Total:</th>
+                        <th class="pane" style="font-weight:bold;">${buildStats.successes}</th>
+                        <th class="pane" style="font-weight:bold;">${buildStats.failures}</th>
+                        <th class="pane" style="font-weight:bold;">${buildStats.unstables}</th>
+                        <th class="pane" style="font-weight:bold;">${buildStats.aborts}</th>
+                        <th class="pane" style="font-weight:bold;">${buildStats.noBuilds}</th>
+                        <th class="pane" style="font-weight:bold;">${buildStats.totalBuilds}</th>
+                        <th class="pane" style="font-weight:bold;">${buildStats.failureRate}%</th>
+                    </tr>
+                </tbody>
+            </table>
         </j:otherwise>
     </j:choose>
-  </l:main-panel>
+</l:main-panel>
 </l:layout>
 </j:jelly>

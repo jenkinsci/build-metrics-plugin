@@ -1,31 +1,33 @@
 package jenkins.plugins.build_metrics.stats;
 
-import hudson.plugins.global_build_stats.model.JobBuildSearchResult;
-import hudson.plugins.global_build_stats.model.BuildResult;
+import com.google.common.collect.Range;
 import hudson.plugins.global_build_stats.Messages;
-
-import java.util.Collection;
-import java.util.Collections;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Hashtable;
-
+import hudson.plugins.global_build_stats.model.BuildResult;
+import hudson.plugins.global_build_stats.model.JobBuildSearchResult;
 import org.kohsuke.stapler.export.Exported;
 import org.kohsuke.stapler.export.ExportedBean;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Hashtable;
+import java.util.List;
+import java.util.Map;
+
 @ExportedBean
 public class StatsFactory {
-	
-  private Hashtable<String, StatsModel> stats;
+
+	private final Map<Range<Double>, String> ranges;
+	private Hashtable<String, StatsModel> stats;
 	private int totalSuccess;
 	private int totalFailure;
 	private int totalAbort;
 	private int totalUnstable;
 	private int totalNobuild;
 	private int totalBuilds;
-	
-	public StatsFactory(){
-	    this.stats = new Hashtable<String, StatsModel>();
+
+	public StatsFactory(Map<Range<Double>, String> ranges){
+		this.ranges = ranges;
+		this.stats = new Hashtable<String, StatsModel>();
 		this.totalSuccess = 0;
 		this.totalFailure = 0;
 		this.totalAbort = 0;
@@ -34,8 +36,8 @@ public class StatsFactory {
 		this.totalBuilds = 0;
 	}
 	
-	public static StatsFactory generateStats(List<JobBuildSearchResult> searchResults){
-		StatsFactory factory = new StatsFactory();
+	public static StatsFactory generateStats(List<JobBuildSearchResult> searchResults, Map<Range<Double>, String> ranges){
+		StatsFactory factory = new StatsFactory(ranges);
 		for(JobBuildSearchResult result: searchResults){
 			factory.addResult(result);
 		}
@@ -47,7 +49,7 @@ public class StatsFactory {
 		if(this.stats.containsKey(result.getJobName())){
 		  stat = this.stats.get(result.getJobName());	
 		}else{
-		  stat = new StatsModel(result.getJobName());
+		  stat = new StatsModel(result.getJobName(), ranges);
 		  this.stats.put(result.getJobName(), stat);
 		}
 		BuildResult r = result.getResult();
