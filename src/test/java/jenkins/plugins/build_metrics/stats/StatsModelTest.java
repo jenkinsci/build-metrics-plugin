@@ -18,6 +18,7 @@ public class StatsModelTest {
 		assert 0 == sm.getNoBuilds();
 		assert 0 == sm.getTotalBuilds();
 		assert 0.00 == sm.getFailureRate();
+		assert 100.0 == sm.getSuccessRate();
 
 		sm.addSuccess();
 		sm.addFailure();
@@ -32,5 +33,6 @@ public class StatsModelTest {
 		assert 1 == sm.getNoBuilds();
 		assert 5 == sm.getTotalBuilds();
 		assert ((4.00 / 5.00) * 100.00) == sm.getFailureRate();
+		assert 20.0 == sm.getSuccessRate();
 	}
 }

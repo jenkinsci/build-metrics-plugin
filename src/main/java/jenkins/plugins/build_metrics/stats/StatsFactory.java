@@ -98,11 +98,6 @@ public class StatsFactory {
 	  return this.totalSuccess;
 	}
 
-	@Exported
-	public double getSuccessesPercent(){
-	  return StatsMath.getPercent(this.totalSuccess, this.totalBuilds);
-	}
-	
 	public boolean isFailure(BuildResult result){
 	  return result.getLabel().equals(Messages.Build_Results_Statuses_FAILURES());
 	}
@@ -167,5 +162,10 @@ public class StatsFactory {
 	@Exported
 	public double getFailureRate(){
 	  return StatsMath.getPercent(this.totalBuilds - this.totalSuccess, this.totalBuilds);
+	}
+
+	@Exported
+	public double getSuccessRate() {
+		return StatsMath.roundTwoDecimals(100.00 - getFailureRate());
 	}
 }

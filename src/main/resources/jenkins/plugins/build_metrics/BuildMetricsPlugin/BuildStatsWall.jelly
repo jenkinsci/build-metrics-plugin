@@ -64,7 +64,14 @@
                         <th>${%# Aborted}</th>
                         <th>${%# Not Built}</th>
                         <th>${%# Total Builds}</th>
+                        <j:choose>
+                        <j:when test="${reportSuccessRate}">
+                        <th>${%Success Rate}</th>
+                        </j:when>
+                        <j:otherwise>
                         <th>${%Failure Rate}</th>
+                        </j:otherwise>
+                        </j:choose>
                     </tr>
                     <j:forEach var="stat" items="${buildStats.stats}">
                         <tr class="build-row" style="background-color: #${stat.bgColor}">
@@ -75,7 +82,14 @@
                             <td class="pane">${stat.aborts}</td>
                             <td class="pane">${stat.noBuilds}</td>
                             <td class="pane">${stat.totalBuilds}</td>
+                            <j:choose>
+                            <j:when test="${reportSuccessRate}">
+                            <td class="pane">${stat.successRate}%</td>
+                            </j:when>
+                            <j:otherwise>
                             <td class="pane">${stat.failureRate}%</td>
+                            </j:otherwise>
+                            </j:choose>
                           </tr>
                     </j:forEach>
                     <tr>
@@ -86,7 +100,14 @@
                         <th class="pane" style="font-weight:bold;">${buildStats.aborts}</th>
                         <th class="pane" style="font-weight:bold;">${buildStats.noBuilds}</th>
                         <th class="pane" style="font-weight:bold;">${buildStats.totalBuilds}</th>
+                        <j:choose>
+                        <j:when test="${reportSuccessRate}">
+                        <th class="pane" style="font-weight:bold;">${buildStats.successRate}%</th>
+                        </j:when>
+                        <j:otherwise>
                         <th class="pane" style="font-weight:bold;">${buildStats.failureRate}%</th>
+                        </j:otherwise>
+                        </j:choose>
                     </tr>
                 </tbody>
             </table>

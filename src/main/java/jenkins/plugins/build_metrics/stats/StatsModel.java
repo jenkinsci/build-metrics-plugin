@@ -90,7 +90,12 @@ public class StatsModel implements Comparable{
 
 	@Exported
 	public double getFailureRate(){
-	  return StatsMath.getPercent(this.totalBuilds - this.successes, this.totalBuilds);
+		return StatsMath.getPercent(this.totalBuilds - this.successes, this.totalBuilds);
+	}
+
+	@Exported
+	public double getSuccessRate() {
+		return StatsMath.roundTwoDecimals(100.00 - getFailureRate());
 	}
 
 	@Exported
