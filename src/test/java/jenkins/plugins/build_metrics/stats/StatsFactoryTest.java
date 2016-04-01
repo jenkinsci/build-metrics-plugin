@@ -1,14 +1,17 @@
 package jenkins.plugins.build_metrics.stats;
 
-import org.junit.Test;
-import static org.junit.Assert.*;
-
-import java.util.ArrayList;
-import java.util.Calendar;
-
+import com.google.common.collect.Maps;
+import com.google.common.collect.Range;
 import hudson.plugins.global_build_stats.model.BuildResult;
 import hudson.plugins.global_build_stats.model.JobBuildResult;
 import hudson.plugins.global_build_stats.model.JobBuildSearchResult;
+import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Map;
+
+import static org.junit.Assert.assertEquals;
 
 public class StatsFactoryTest {
 	@Test
@@ -16,11 +19,15 @@ public class StatsFactoryTest {
 		ArrayList<JobBuildSearchResult> jbsr = new ArrayList<JobBuildSearchResult>();
 		jbsr.add(createJobResult("build job 1", true));
 		jbsr.add(createJobResult("build job 1", false));
-		StatsFactory sf = StatsFactory.generateStats(jbsr);
-		assertEquals("StatsFactory.failureRate", 50.00, sf.getFailureRate(), 0);
-		
+		jbsr.add(createJobResult("build job 1", false));
+		Map<Range<Double>, String> ranges = Maps.newHashMap();
+		StatsFactory sf = StatsFactory.generateStats(jbsr, ranges);
+		assertEquals("StatsFactory.failureRate", 66.67, sf.getFailureRate(), 0);
+		assertEquals("StatsFactory.successRate", 33.33, sf.getSuccessRate(), 0);
+
 		for(StatsModel stat: sf.getStats()){
-		  assertEquals("StatsModel.failureRate", 50.00, stat.getFailureRate(), 0);
+		  assertEquals("StatsModel.failureRate", 66.67, stat.getFailureRate(), 0);
+          assertEquals("StatsModel.successRate", 33.33, stat.getSuccessRate(), 0);
 	  }
 	}
 	

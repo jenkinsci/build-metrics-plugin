@@ -14,17 +14,19 @@ public class BuildMetricsSearch {
 	private int range;
 	private String rangeUnits;
 	private String jobFilter;
-	private String nodeFilter; 
+	private String nodeFilter;
 	private String launcherFilter;
-	
-	public BuildMetricsSearch(String label, int range, String rangeUnits, String jobFilter, String nodeFilter, String launcherFilter){
+	private String wallCss;
+
+	public BuildMetricsSearch(String label, int range, String rangeUnits, String jobFilter, String nodeFilter, String launcherFilter, String wallCss){
 		this.label = label;
 		this.range = range;
 		this.rangeUnits = rangeUnits;
 		this.jobFilter = jobFilter;
 		this.nodeFilter = nodeFilter; 
 		this.launcherFilter = launcherFilter;
-		
+		this.wallCss = wallCss;
+
 	}
 
 	@Exported
@@ -69,5 +71,12 @@ public class BuildMetricsSearch {
 	public void setLauncherFilter(String launcherFilter) {
 		this.launcherFilter = launcherFilter;
 	}
-	
+	@Exported
+	public String getWallCss() {
+		return wallCss;
+	}
+	public void setWallCss(String wallCss) {
+		this.wallCss = wallCss;
+	}
+
 }

@@ -1,22 +1,21 @@
 package jenkins.plugins.build_metrics;
 
-import jenkins.plugins.build_metrics.stats.StatsFactory;
-
+import com.google.common.collect.Range;
+import hudson.model.Hudson;
+import hudson.model.Job;
+import hudson.model.Run;
 import hudson.plugins.global_build_stats.GlobalBuildStatsPlugin;
 import hudson.plugins.global_build_stats.business.GlobalBuildStatsBusiness;
-import hudson.plugins.global_build_stats.model.BuildSearchCriteria;
 import hudson.plugins.global_build_stats.model.BuildHistorySearchCriteria;
+import hudson.plugins.global_build_stats.model.BuildSearchCriteria;
 import hudson.plugins.global_build_stats.model.JobBuildSearchResult;
-
-import hudson.model.Hudson;
-import hudson.model.Run;
-import hudson.model.Job;
-
+import jenkins.plugins.build_metrics.stats.StatsFactory;
 import org.kohsuke.stapler.StaplerRequest;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.ArrayList;
+import java.util.Map;
 
 public class BuildMetricsPluginSearchFactory {
 	/* the following static values come back from the search form*/
@@ -27,8 +26,8 @@ public class BuildMetricsPluginSearchFactory {
 	
 	public BuildMetricsPluginSearchFactory(){}
 	
-	public StatsFactory getBuildStats(BuildMetricsSearch bms){
-	  return StatsFactory.generateStats(searchBuilds(bms));
+	public StatsFactory getBuildStats(BuildMetricsSearch bms, Map<Range<Double>, String> ranges){
+	  return StatsFactory.generateStats(searchBuilds(bms), ranges);
 	}
 	
 	public List<JobBuildSearchResult> searchBuilds(BuildMetricsSearch bms){
@@ -99,11 +98,12 @@ public class BuildMetricsPluginSearchFactory {
 	public BuildMetricsSearch createBuildMetricsSearch(StaplerRequest req){
 		return new BuildMetricsSearch(
 				req.getParameter("label"),
-				Integer.parseInt(req.getParameter("range")), 
+				Integer.parseInt(req.getParameter("range")),
 				req.getParameter("rangeUnits"),
-				req.getParameter("jobFilter"), 
-				req.getParameter("nodeFilter"), 
-				req.getParameter("launcherFilter")
+				req.getParameter("jobFilter"),
+				req.getParameter("nodeFilter"),
+				req.getParameter("launcherFilter"),
+				req.getParameter("wallCss")
 				);
 	}
 	

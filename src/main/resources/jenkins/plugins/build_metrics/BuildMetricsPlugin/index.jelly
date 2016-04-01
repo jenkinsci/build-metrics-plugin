@@ -130,6 +130,14 @@
 		  	  $('searchBuild_launcherFilteringType_ALL').onchange();
 		  }
 		  ]]></script>
+          <label for="wallView">Wall view : </label>
+          <input type="checkbox" id="searchBuild_wallView" name="wallView" /><br/>
+          <label for="ranges">Ranges : </label>
+          <input type="text" id="searchBuild_ranges" name="ranges" /><br/>
+          <label for="fontSize">Font Size: </label>
+          <input type="text" id="searchBuild_fontSize" name="fontSize" /><br/>
+          <label for="reportSuccessRate">Report Success Rate: </label>
+          <input type="checkbox" id="searchBuild_reportSuccessRate" name="reportSuccessRate" /><br/>
 	      <input type="submit" class="submit-button" value="${%Search}" name="Submit" />
 	    </form>
     
