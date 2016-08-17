@@ -1,6 +1,8 @@
 package jenkins.plugins.build_metrics.stats;
 
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
 
 public class StatsMath {
 
@@ -9,7 +11,8 @@ public class StatsMath {
 	}
 	
 	public static double roundTwoDecimals(double iVal){
-		DecimalFormat twoDForm = new DecimalFormat("#.##");
-        return Double.valueOf(twoDForm.format(iVal));
+		DecimalFormatSymbols decimalFormatSymbols = new DecimalFormatSymbols(Locale.getDefault()); 
+		DecimalFormat twoDForm = new DecimalFormat("#"+decimalFormatSymbols.getDecimalSeparator()+"##",decimalFormatSymbols); 
+		return Double.valueOf(twoDForm.format(iVal));
 	}
 }
