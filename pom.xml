@@ -53,6 +53,12 @@
       <email>ydubreuil@cloudbees.com</email>
       <url>https://github.com/ydubreuil</url>
     </developer>
+    <developer>
+      <id>opx3</id>
+      <name>Rolf Rother</name>
+      <email>roropx3@googlemail.com</email>
+      <url>https://github.com/opx3</url>
+    </developer>
   </developers>
   
   <build>
