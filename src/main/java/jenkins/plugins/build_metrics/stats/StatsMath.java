@@ -11,8 +11,8 @@ public class StatsMath {
 	}
 	
 	public static double roundTwoDecimals(double iVal){
-		DecimalFormatSymbols decimalFormatSymbols = new DecimalFormatSymbols(Locale.getDefault()); 
-		DecimalFormat twoDForm = new DecimalFormat("#"+decimalFormatSymbols.getDecimalSeparator()+"##",decimalFormatSymbols); 
+		DecimalFormatSymbols decimalFormatSymbols = new DecimalFormatSymbols(Locale.ENGLISH); 
+		DecimalFormat twoDForm = new DecimalFormat("#.00",decimalFormatSymbols);
 		return Double.valueOf(twoDForm.format(iVal));
 	}
 }

@@ -23,6 +23,7 @@ public class StatsFactory {
 	private int totalUnstable;
 	private int totalNobuild;
 	private int totalBuilds;
+	private String space;
 	
 	public StatsFactory(){
 	    this.stats = new Hashtable<String, StatsModel>();
@@ -32,6 +33,7 @@ public class StatsFactory {
 		this.totalUnstable = 0;
 		this.totalNobuild = 0;
 		this.totalBuilds = 0;
+		this.space="&nbsp;";
 	}
 	
 	public static StatsFactory generateStats(List<JobBuildSearchResult> searchResults){
@@ -166,4 +168,10 @@ public class StatsFactory {
 	public double getFailureRate(){
 	  return StatsMath.getPercent(this.totalBuilds - this.totalSuccess, this.totalBuilds);
 	}
+
+	@Exported
+	public String getPaddedFailureRate(){
+	  return String.format("%12.2f", this.getFailureRate()).replace(" ", this.space);	
+	}
+	
 }

@@ -11,7 +11,8 @@ public class StatsModel implements Comparable{
 	private int aborts;
 	private int unstables;
 	private int nobuilds;
-  private int totalBuilds;
+	private int totalBuilds;
+	private String space;
 	
 	public StatsModel(String jobName){
 	  this.jobName = jobName;
@@ -21,6 +22,7 @@ public class StatsModel implements Comparable{
 	  this.unstables = 0;
 	  this.nobuilds = 0;
 	  this.totalBuilds = 0;
+	  this.space="&nbsp;";
 	}
 	
 	public String getJobName(){
@@ -85,6 +87,11 @@ public class StatsModel implements Comparable{
 	@Exported
 	public double getFailureRate(){
 	  return StatsMath.getPercent(this.totalBuilds - this.successes, this.totalBuilds);
+	}
+
+	@Exported
+	public String getPaddedFailureRate(){
+	  return String.format("%12.2f", this.getFailureRate()).replace(" ", this.space);
 	}
 	
 	public int compareTo(Object o){

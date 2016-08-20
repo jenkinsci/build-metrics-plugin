@@ -40,7 +40,7 @@
               <td class="pane">${stat.aborts}</td>
               <td class="pane">${stat.noBuilds}</td>
               <td class="pane">${stat.totalBuilds}</td>
-              <td class="pane">${stat.failureRate}%</td>
+              <td class="pane">${stat.paddedFailureRate}%</td>
             </tr>
 		  		</j:forEach>
   		  		<tr>
@@ -51,7 +51,7 @@
               <th class="pane" style="font-weight:bold;">${buildStats.aborts}</th>
               <th class="pane" style="font-weight:bold;">${buildStats.noBuilds}</th>
               <th class="pane" style="font-weight:bold;">${buildStats.totalBuilds}</th>
-              <th class="pane" style="font-weight:bold;">${buildStats.failureRate}%</th>
+              <th class="pane" style="font-weight:bold;">${buildStats.paddedFailureRate}%</th>
             </tr>
   		  	</table>
     		</j:otherwise>
