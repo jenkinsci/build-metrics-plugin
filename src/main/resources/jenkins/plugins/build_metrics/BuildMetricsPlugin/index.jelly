@@ -92,6 +92,16 @@
 		      />
 		      <input id="searchBuild_launcherFilter" type="hidden" name="launcherFilter" value="${escapedLauncherFilter}" />
 	      	</li>
+		    <li>
+		      ${%Cause filtering} : <input type="radio" id="searchBuild_causeFilteringType_ALL" checked="checked" name="causeFilteringType" value="${FIELD_FILTER_ALL}" onchange="fieldFilterTypeSelected(this.value, 'searchBuild_causeNameRegex', 'searchBuild_causeFilter');" />${%ALL Causes}
+		      <input type="radio" id="searchBuild_causeFilteringType_REGEXSYSTEM" name="causeFilteringType" value="${CAUSE_SYSTEM_REGEX}" onchange="fieldFilterTypeSelected(this.value, 'searchBuild_causeNameRegex', 'searchBuild_causeFilter');" />
+		      ${%Cause regex} :
+		      <input type="text" id="searchBuild_causeNameRegex" 
+		      		 disabled="true" name="causeNameRegex" size="10"
+		      		 onblur="$('searchBuild_causeFilter').value=FIELD_FILTER_REGEX+'('+this.value+')';" 
+		      />
+		      <input id="searchBuild_causeFilter" type="hidden" name="causeFilter" value="${escapedCauseFilter}" />
+	      	</li>
 	      </ul>
 		  <script type="text/javascript"><![CDATA[
 		  if($('searchBuild_jobFilter').value.indexOf(FIELD_FILTER_REGEX) != -1){
