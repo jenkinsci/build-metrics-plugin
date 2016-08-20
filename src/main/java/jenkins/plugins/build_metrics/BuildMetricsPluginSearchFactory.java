@@ -1,16 +1,16 @@
 package jenkins.plugins.build_metrics;
 
 import jenkins.plugins.build_metrics.stats.StatsFactory;
-
+import jenkins.plugins.build_metrics.stats.StatsHelper;
 import hudson.plugins.global_build_stats.GlobalBuildStatsPlugin;
 import hudson.plugins.global_build_stats.business.GlobalBuildStatsBusiness;
 import hudson.plugins.global_build_stats.model.BuildSearchCriteria;
 import hudson.plugins.global_build_stats.model.BuildHistorySearchCriteria;
 import hudson.plugins.global_build_stats.model.JobBuildSearchResult;
-
 import hudson.model.Hudson;
 import hudson.model.Run;
 import hudson.model.Job;
+import hudson.model.Cause;
 
 import org.kohsuke.stapler.StaplerRequest;
 
@@ -28,7 +28,7 @@ public class BuildMetricsPluginSearchFactory {
 	public BuildMetricsPluginSearchFactory(){}
 	
 	public StatsFactory getBuildStats(BuildMetricsSearch bms){
-	  return StatsFactory.generateStats(searchBuilds(bms));
+	  return StatsFactory.generateStats(searchBuilds(bms),bms);
 	}
 	
 	public List<JobBuildSearchResult> searchBuilds(BuildMetricsSearch bms){
@@ -42,8 +42,21 @@ public class BuildMetricsPluginSearchFactory {
 	  BuildSearchCriteria criteria = createFailedBuildSearchCriteria(bms);
 	  List<JobBuildSearchResult> results = business.searchBuilds(createBuildHistorySearchCriteria(bms, criteria));
 	  List<BuildMetricsBuild> failedBuilds = new ArrayList<BuildMetricsBuild>();
+	  boolean addThis=true;
 	  for(JobBuildSearchResult result: results){
-		  failedBuilds.add(
+		  
+		if ( !bms.getCauseFilter().isEmpty() ) {
+			String cause = StatsHelper.findBuildDescription(result.getJobName(), result.getBuildNumber());
+			String regexp = StatsHelper.fieldRegex(bms.getCauseFilter());
+			if ( cause!=null && cause.matches(regexp) ) {
+				  addThis=true;
+			} else
+				addThis=false;
+		} else
+			addThis=true;
+
+		if ( addThis )
+		failedBuilds.add(
 		    new BuildMetricsBuild( 
 		      result.getBuildNumber(),
 			    result.getJobName(),
@@ -52,25 +65,12 @@ public class BuildMetricsPluginSearchFactory {
 			    result.getBuildDate(),
 			    result.getDuration(),
 			    result.getResult().getLabel(),
-			    findBuildDescription(result.getJobName(), result.getBuildNumber())
+			    StatsHelper.findBuildDescription(result.getJobName(), result.getBuildNumber())
 			));
 	  }
 	  return failedBuilds;
 	}
 	
-	private String findBuildDescription(String jobName, int buildNumber){
-		String description = null;
-		Job j = (Job)(Hudson.getInstance().getItem(jobName));
-		if(j != null){
-			Run r = j.getBuildByNumber(buildNumber);
-			if(r != null){
-				description = r.getDescription();
-			}
-		}
-		return description;
-	}
-	
-
 	public Long getStartDate(int range, String rangeUnits){
 		int iRange = range * -1;
 		int iUnits = Calendar.DAY_OF_YEAR;//default = RANGE_DAYS
@@ -103,7 +103,8 @@ public class BuildMetricsPluginSearchFactory {
 				req.getParameter("rangeUnits"),
 				req.getParameter("jobFilter"), 
 				req.getParameter("nodeFilter"), 
-				req.getParameter("launcherFilter")
+				req.getParameter("launcherFilter"),
+				req.getParameter("causeFilter")
 				);
 	}
 	

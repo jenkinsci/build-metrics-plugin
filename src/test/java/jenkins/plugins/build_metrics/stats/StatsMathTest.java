@@ -18,6 +18,5 @@ public class StatsMathTest {
 		assertEquals("2/3", 66.67, StatsMath.getPercent(subVal, totalVal), 0);
 		assertEquals("1/1", 100.00, StatsMath.getPercent(1, 1), 0);
 		assertEquals("3/2", 150.00, StatsMath.getPercent(3, 2), 0);
-		assertEquals("3/2", 17.00, StatsMath.getPercent(3, 2), 0);
 	}
 }

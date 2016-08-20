@@ -1,14 +1,23 @@
 package jenkins.plugins.build_metrics.stats;
 
+import hudson.model.Cause;
+import hudson.model.Hudson;
+import hudson.model.Job;
+import hudson.model.Run;
 import hudson.plugins.global_build_stats.model.JobBuildSearchResult;
 import hudson.plugins.global_build_stats.model.BuildResult;
 import hudson.plugins.global_build_stats.Messages;
 
+import java.util.logging.ConsoleHandler;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Hashtable;
+
+import jenkins.plugins.build_metrics.BuildMetricsSearch;
 
 import org.kohsuke.stapler.export.Exported;
 import org.kohsuke.stapler.export.ExportedBean;
@@ -36,14 +45,24 @@ public class StatsFactory {
 		this.space="&nbsp;";
 	}
 	
-	public static StatsFactory generateStats(List<JobBuildSearchResult> searchResults){
+	public static StatsFactory generateStats(List<JobBuildSearchResult> searchResults, BuildMetricsSearch bms){
 		StatsFactory factory = new StatsFactory();
+		Logger log = LogManager.getLogManager().getLogger("hudson.WebAppMain");
 		for(JobBuildSearchResult result: searchResults){
-			factory.addResult(result);
+			// Check if our own criteria "causeFilter" is set and if this result goes
+			// threw the filter
+			if ( bms.getCauseFilter()!=null && !bms.getCauseFilter().isEmpty() ) {
+				String cause = StatsHelper.findBuildDescription(result.getJobName(), result.getBuildNumber());
+				String regexp = StatsHelper.fieldRegex(bms.getCauseFilter());
+				if ( cause!=null && cause.matches(regexp) ) {
+					factory.addResult(result);
+				}
+			} else
+				factory.addResult(result);
 		}
 		return factory;
 	}
-	
+
 	public void addResult(JobBuildSearchResult result){
 		StatsModel stat = null;
 		if(this.stats.containsKey(result.getJobName())){

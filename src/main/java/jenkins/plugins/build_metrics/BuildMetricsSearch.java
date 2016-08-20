@@ -16,15 +16,16 @@ public class BuildMetricsSearch {
 	private String jobFilter;
 	private String nodeFilter; 
 	private String launcherFilter;
+	private String causeFilter;
 	
-	public BuildMetricsSearch(String label, int range, String rangeUnits, String jobFilter, String nodeFilter, String launcherFilter){
+	public BuildMetricsSearch(String label, int range, String rangeUnits, String jobFilter, String nodeFilter, String launcherFilter, String causeFilter){
 		this.label = label;
 		this.range = range;
 		this.rangeUnits = rangeUnits;
 		this.jobFilter = jobFilter;
 		this.nodeFilter = nodeFilter; 
 		this.launcherFilter = launcherFilter;
-		
+		this.causeFilter = causeFilter;
 	}
 
 	@Exported
@@ -68,6 +69,13 @@ public class BuildMetricsSearch {
 	}
 	public void setLauncherFilter(String launcherFilter) {
 		this.launcherFilter = launcherFilter;
+	}
+	@Exported
+	public String getCauseFilter() {
+		return causeFilter;
+	}
+	public void setCauseFilter(String causeFilter) {
+		this.causeFilter = causeFilter;
 	}
 	
 }

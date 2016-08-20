@@ -5,6 +5,7 @@
 	<j:invoke var="FIELD_FILTER_REGEX" on="${it}" method="getFieldFilterRegex" />
 	<j:set var="LAUNCHER_SYSTEM_REGEX" value="${FIELD_FILTER_REGEX}(^SYSTEM$$)"/>
 	<j:set var="NODE_MASTER_REGEX" value="${FIELD_FILTER_REGEX}(^master$$)"/>
+	<j:set var="CAUSE_SYSTEM_REGEX" value="${FIELD_FILTER_REGEX}"/>
     <!-- For an unknown reason, j:invokeStatic doesn't work here ! :( -->
     <j:invoke var="escapedJobFilter" on="${it}" method="escapeAntiSlashes">
     	<j:arg type="java.lang.String" value="" />
@@ -26,9 +27,10 @@
       FIELD_FILTER_REGEX = "${FIELD_FILTER_REGEX}";
       LAUNCHER_SYSTEM_REGEX = "${LAUNCHER_SYSTEM_REGEX}";
       NODE_MASTER_REGEX = "${NODE_MASTER_REGEX}";
-          ESCAPED_JOB_FILTER = "${escapedJobFilter}";
-          ESCAPED_NODE_FILTER = "${escapedNodeFilter}";
-          ESCAPED_LAUNCHER_FILTER = "${escapedLauncherFilter}";
+      CAUSE_SYSTEM_REGEX = "${CAUSE_SYSTEM_REGEX}";
+      ESCAPED_JOB_FILTER = "${escapedJobFilter}";
+      ESCAPED_NODE_FILTER = "${escapedNodeFilter}";
+      ESCAPED_LAUNCHER_FILTER = "${escapedLauncherFilter}";
     </script>
     <script src="${rootURL}/plugin/global-build-stats/scripts/global-build-stats/buildHistory.js"></script>
 	</l:header>
@@ -138,6 +140,15 @@
 		  } else if($('searchBuild_launcherFilter').value.indexOf(FIELD_FILTER_ALL) != -1){
 		  	  $('searchBuild_launcherFilteringType_ALL').checked = 'checked';
 		  	  $('searchBuild_launcherFilteringType_ALL').onchange();
+		  }
+		  if($('searchBuild_causeFilter').value.indexOf(CAUSE_SYSTEM_REGEX) != -1){
+		  	  $('searchBuild_causeFilteringType_REGEX').checked = 'checked';
+		  	  initializeRegexField('searchBuild_causeNameRegex', ESCAPED_CAUSE_FILTER);
+		  	  $('searchBuild_causeFilteringType_REGEX').onchange();
+		  	  $('searchBuild_causeNameRegex').disabled = false;
+		  } else if(document.getElementById('searchBuild_causeFilter').value.indexOf(FIELD_FILTER_ALL) != -1){
+		  	  $('searchBuild_causeFilteringType_ALL').checked = 'checked';
+		  	  $('searchBuild_causeFilteringType_ALL').onchange();
 		  }
 		  ]]></script>
 	      <input type="submit" class="submit-button" value="${%Search}" name="Submit" />
