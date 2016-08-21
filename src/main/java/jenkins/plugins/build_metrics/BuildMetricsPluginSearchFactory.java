@@ -83,7 +83,7 @@ public class BuildMetricsPluginSearchFactory {
 		}
 		Calendar tmpCal = Calendar.getInstance();
 		tmpCal.add(iUnits, iRange);
-		return new Long(tmpCal.getTimeInMillis());
+		return Long.valueOf(tmpCal.getTimeInMillis());
 	}
 	
 	public Long getDefaultStartDate(){
