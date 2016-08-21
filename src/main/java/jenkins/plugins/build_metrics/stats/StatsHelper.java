@@ -3,8 +3,8 @@ package jenkins.plugins.build_metrics.stats;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import jenkins.model.Jenkins;
 import hudson.model.Cause;
-import hudson.model.Hudson;
 import hudson.model.Job;
 import hudson.model.Run;
 
@@ -18,7 +18,7 @@ public class StatsHelper {
 	
 	public static String findBuildCause(String jobName, int buildNumber){
 		String description = null;
-		Job j = (Job)(Hudson.getInstance().getItem(jobName));
+		Job j = (Job)(Jenkins.getInstance().getItem(jobName));
 		if(j != null){
 			Run r = j.getBuildByNumber(buildNumber);
 			if(r != null){
@@ -30,7 +30,7 @@ public class StatsHelper {
 
 	public static String findBuildDescription(String jobName, int buildNumber){
 		String description = null;
-		Job j = (Job)(Hudson.getInstance().getItem(jobName));
+		Job j = (Job)(Jenkins.getInstance().getItem(jobName));
 		if(j != null){
 			Run r = j.getBuildByNumber(buildNumber);
 			if(r != null){
