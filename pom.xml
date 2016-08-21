@@ -4,11 +4,11 @@
     <groupId>org.jenkins-ci.plugins</groupId>
     <artifactId>plugin</artifactId>
     <version>2.11</version>
-    <relativePath/>
+    <relativePath />
   </parent>
 
   <artifactId>build-metrics</artifactId>
-  <version>1.2-SNAPSHOT</version>
+  <version>1.2</version>
   <packaging>hpi</packaging>
   
   <properties>
@@ -25,7 +25,7 @@
     <connection>scm:git:ssh://github.com/jenkinsci/build-metrics-plugin.git</connection>
     <developerConnection>scm:git:ssh://git@github.com/jenkinsci/build-metrics-plugin.git</developerConnection>
     <url>https://github.com/jenkinsci/build-metrics-plugin</url>
-    <tag>HEAD</tag>
+    <tag>build-metrics-1.2</tag>
   </scm>
 	
   <!-- get every artifact through maven.glassfish.org, which proxies all the artifacts that we need -->
