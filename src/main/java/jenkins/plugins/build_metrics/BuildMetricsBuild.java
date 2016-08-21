@@ -16,10 +16,6 @@ public class BuildMetricsBuild {
 	private long duration;
 	private String status;
 	private String description;
-	/**
-	 * Static formatter to use for dates
-	 */
-	private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss aaa");
 	
 	public BuildMetricsBuild(int buildNumber, String jobName, String nodeName, String userName, Calendar buildDate, long duration, String status, String description){
 		this.buildNumber = buildNumber;
@@ -60,6 +56,7 @@ public class BuildMetricsBuild {
 		return buildDate;
 	}
 	public String getBuildDateString(){
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss aaa");
 		return sdf.format(this.buildDate.getTime());
 	}
 	public void setBuildDate(Calendar buildDate) {
