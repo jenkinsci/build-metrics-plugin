@@ -89,11 +89,11 @@ public class BuildMetricsPluginSearchFactory {
 	public Long getDefaultStartDate(){
 		Calendar tmpCal = Calendar.getInstance();
 		tmpCal.roll(Calendar.WEEK_OF_YEAR, -2);
-		return new Long(tmpCal.getTimeInMillis());
+		return Long.valueOf(tmpCal.getTimeInMillis());
 	}
 	
 	public Long getDefaultEndDate(){
-		return new Long(Calendar.getInstance().getTimeInMillis());
+		return Long.valueOf(Calendar.getInstance().getTimeInMillis());
 	}
 	
 	public BuildMetricsSearch createBuildMetricsSearch(StaplerRequest req){
