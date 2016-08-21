@@ -2,7 +2,6 @@ package jenkins.plugins.build_metrics;
 
 import jenkins.plugins.build_metrics.stats.StatsFactory;
 
-import hudson.model.Hudson;
 import hudson.Extension;
 import hudson.Plugin;
 import hudson.model.ManagementLink;
@@ -14,20 +13,16 @@ import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;
 
-import org.kohsuke.stapler.HttpResponse;
-import org.kohsuke.stapler.QueryParameter;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
-import org.kohsuke.stapler.export.Exported;
 import org.kohsuke.stapler.export.ExportedBean;
-import org.kohsuke.stapler.export.Flavor;
 
 
 /**
  * Entry point of the build metrics plugin
  * 
  * @author mgoss
- * @plugin
+ *
  */
 @ExportedBean
 public class BuildMetricsPlugin extends Plugin {
