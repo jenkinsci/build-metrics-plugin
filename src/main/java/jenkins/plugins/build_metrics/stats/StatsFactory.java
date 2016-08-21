@@ -47,7 +47,6 @@ public class StatsFactory {
 	
 	public static StatsFactory generateStats(List<JobBuildSearchResult> searchResults, BuildMetricsSearch bms){
 		StatsFactory factory = new StatsFactory();
-		Logger log = LogManager.getLogManager().getLogger("hudson.WebAppMain");
 		for(JobBuildSearchResult result: searchResults){
 			// Check if our own criteria "causeFilter" is set and if this result goes
 			// threw the filter

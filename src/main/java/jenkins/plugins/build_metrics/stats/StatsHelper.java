@@ -18,11 +18,14 @@ public class StatsHelper {
 	
 	public static String findBuildCause(String jobName, int buildNumber){
 		String description = null;
-		Job j = (Job)(Jenkins.getInstance().getItem(jobName));
-		if(j != null){
-			Run r = j.getBuildByNumber(buildNumber);
-			if(r != null){
-				description = ((Cause)r.getCauses().get(0)).getShortDescription();
+		Jenkins inst = Jenkins.getInstance();
+		if ( inst != null ) {
+			Job j = (Job)(inst.getItem(jobName));
+			if(j != null){
+				Run r = j.getBuildByNumber(buildNumber);
+				if(r != null){
+					description = ((Cause)r.getCauses().get(0)).getShortDescription();
+				}
 			}
 		}
 		return description;
@@ -30,11 +33,14 @@ public class StatsHelper {
 
 	public static String findBuildDescription(String jobName, int buildNumber){
 		String description = null;
-		Job j = (Job)(Jenkins.getInstance().getItem(jobName));
-		if(j != null){
-			Run r = j.getBuildByNumber(buildNumber);
-			if(r != null){
-				description = r.getDescription();
+		Jenkins inst = Jenkins.getInstance();
+		if ( inst != null ) {
+			Job j = (Job)(inst.getItem(jobName));
+			if(j != null){
+				Run r = j.getBuildByNumber(buildNumber);
+				if(r != null){
+					description = r.getDescription();
+				}
 			}
 		}
 		return description;

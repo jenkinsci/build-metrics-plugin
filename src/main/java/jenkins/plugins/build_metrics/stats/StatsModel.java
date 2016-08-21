@@ -103,4 +103,52 @@ public class StatsModel implements Comparable{
 	  return this.jobName.toUpperCase().compareTo(sm.getJobName().toUpperCase());
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + aborts;
+		result = prime * result + failures;
+		result = prime * result + ((jobName == null) ? 0 : jobName.hashCode());
+		result = prime * result + nobuilds;
+		result = prime * result + ((space == null) ? 0 : space.hashCode());
+		result = prime * result + successes;
+		result = prime * result + totalBuilds;
+		result = prime * result + unstables;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		StatsModel other = (StatsModel) obj;
+		if (aborts != other.aborts)
+			return false;
+		if (failures != other.failures)
+			return false;
+		if (jobName == null) {
+			if (other.jobName != null)
+				return false;
+		} else if (!jobName.equals(other.jobName))
+			return false;
+		if (nobuilds != other.nobuilds)
+			return false;
+		if (space == null) {
+			if (other.space != null)
+				return false;
+		} else if (!space.equals(other.space))
+			return false;
+		if (successes != other.successes)
+			return false;
+		if (totalBuilds != other.totalBuilds)
+			return false;
+		if (unstables != other.unstables)
+			return false;
+		return true;
+	} 
 }

@@ -20,10 +20,10 @@ import java.util.ArrayList;
 
 public class BuildMetricsPluginSearchFactory {
 	/* the following static values come back from the search form*/
-	public static String RANGE_DAYS = "Days";
-	public static String RANGE_WEEKS = "Weeks";
-	public static String RANGE_MONTHS = "Months";
-	public static String RANGE_YEARS = "Years";
+	public final static String RANGE_DAYS = "Days";
+	public final static String RANGE_WEEKS = "Weeks";
+	public final static String RANGE_MONTHS = "Months";
+	public final static String RANGE_YEARS = "Years";
 	
 	public BuildMetricsPluginSearchFactory(){}
 	
