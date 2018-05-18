@@ -13,6 +13,7 @@ public class StatsModel implements Comparable{
 	private int nobuilds;
 	private int totalBuilds;
 	private String space;
+	private String jobUrl;
 	
 	public StatsModel(String jobName){
 	  this.jobName = jobName;
@@ -23,6 +24,7 @@ public class StatsModel implements Comparable{
 	  this.nobuilds = 0;
 	  this.totalBuilds = 0;
 	  this.space="&nbsp;";
+          this.jobUrl = "job/" + jobName.replaceAll("/","/job/");
 	}
 	
 	public String getJobName(){
@@ -102,6 +104,11 @@ public class StatsModel implements Comparable{
 	public int compareTo(StatsModel sm){
 	  return this.jobName.toUpperCase().compareTo(sm.getJobName().toUpperCase());
 	}
+
+        @Exported
+        public String getJobUrl() {
+          return this.jobUrl;
+        }
 
 	@Override
 	public int hashCode() {
