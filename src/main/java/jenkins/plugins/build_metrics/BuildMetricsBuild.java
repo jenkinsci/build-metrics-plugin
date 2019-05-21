@@ -16,6 +16,8 @@ public class BuildMetricsBuild {
 	private long duration;
 	private String status;
 	private String description;
+	private String jobUrl;
+	private String buildUrl;
 	
 	public BuildMetricsBuild(int buildNumber, String jobName, String nodeName, String userName, Calendar buildDate, long duration, String status, String description){
 		this.buildNumber = buildNumber;
@@ -26,6 +28,8 @@ public class BuildMetricsBuild {
 		this.duration = duration;
 		this.status = status;
 		this.description = description;
+                this.jobUrl = "job/" + jobName.replaceAll("/","/job/");
+                this.buildUrl = this.jobUrl + "/" + String.valueOf(buildNumber);
 	}
 	
 	public int getBuildNumber() {
@@ -80,4 +84,10 @@ public class BuildMetricsBuild {
 	public void setDescription(String description){
 		this.description = description;
 	}
+        public String getJobUrl() {
+            return this.jobUrl;
+        }
+        public String getBuildUrl() {
+            return this.buildUrl;
+        }
 }
